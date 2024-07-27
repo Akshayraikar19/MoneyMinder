@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Loan Management System
 
 ## Overview
@@ -39,4 +39,3 @@ GitHub: Akshayraikar19
 =======
 # MoneyMinder
 Loan Management System: A full-featured application for managing loan applications, payments, and officer verification. Includes admin panel, loan tracking, payment integration with Stripe, image uploads with Cloudinary, task scheduling with Node Cron.
->>>>>>> caf09d6797720a06b5a550b93d2dbd328f5a4809
