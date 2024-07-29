@@ -9,6 +9,7 @@ import axios from './config/axios';
 import { useAuth } from './context/AuthContext';
 
 import Home from './components/Home';
+import LearnMore from './components/Learnmore';
 import Register from './components/Register';
 import Login from './components/Login';
 import Account from './components/Account';
@@ -81,6 +82,10 @@ function App() {
             <NavItem>
               <NavLink tag={Link} to="/">Home</NavLink>
             </NavItem>
+
+            {/* <NavItem>
+              <NavLink tag={Link} to="/learn-more">Learn More</NavLink> 
+            </NavItem> */}
 
             <NavItem>
               <NavLink tag={Link} to="/loan-list">Loans</NavLink>
@@ -165,6 +170,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/learn-more" element={<LearnMore />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />

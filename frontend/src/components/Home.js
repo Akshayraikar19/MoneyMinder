@@ -1,75 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from "../context/AuthContext";
- import bg11 from '../assets/images/bg11.jpg';
+// import React, { useState, useEffect } from 'react';
+// import { useAuth } from "../context/AuthContext";
+//  import bg11 from '../assets/images/bg11.jpg';
 
-import bg6 from '../assets/images/bg6.jpg'
- import bg8 from '../assets/images/bg8.jpeg'
- import bg7 from '../assets/images/bg7.jpg'
- import bg9 from '../assets/images/bg9.jpg'
- import bg12 from '../assets/images/bg12.jpg'
- import bg1 from '../assets/images/bg1.jpg'
+// import bg6 from '../assets/images/bg6.jpg'
+//  import bg8 from '../assets/images/bg8.jpeg'
+//  import bg7 from '../assets/images/bg7.jpg'
+//  import bg9 from '../assets/images/bg9.jpg'
+//  import bg12 from '../assets/images/bg12.jpg'
+//  import bg1 from '../assets/images/bg1.jpg'
  
 
-import { useNavigate } from 'react-router-dom';
-import Footer from './Footer';
+// import { useNavigate } from 'react-router-dom';
+// import Footer from './Footer';
 
-const backgrounds =[bg11,bg7, bg8,bg6,bg1, bg12, bg9];
+// const backgrounds =[bg11,bg7, bg8,bg6,bg1, bg12, bg9];
 
-const Home = () => {
-    const { user } = useAuth();
-    const navigate = useNavigate();
-    const [activeIndex, setActiveIndex] = useState(0);
+// const Home = () => {
+//     const { user } = useAuth();
+//     const navigate = useNavigate();
+//     const [activeIndex, setActiveIndex] = useState(0);
 
-    const handleRegisterClick = () => {
-        if (!user) {
-            navigate('/register');
-        }
-    };
+//     const handleRegisterClick = () => {
+//         if (!user) {
+//             navigate('/register');
+//         }
+//     };
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setActiveIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
-        }, 4000); // Change background every 4 seconds
+//     useEffect(() => {
+//         const interval = setInterval(() => {
+//             setActiveIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
+//         }, 4000); // Change background every 4 seconds
 
-        return () => clearInterval(interval);
-    }, []);
+//         return () => clearInterval(interval);
+//     }, []);
 
-    return (
-        <div className="min-h-screen flex flex-col items-center justify-center">
-            <main
-                className="flex-grow flex flex-col items-center justify-center bg-cover bg-center mt-16 p-4 rounded-lg"
-                style={{
-                    backgroundImage: `url(${backgrounds[activeIndex]})`,
-                    minHeight: '100vh',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center center',
-                    display: 'flex',
-                    alignItems: 'center',
-                    textAlign: 'center'
-                }}
-            >
-                <div className="bg-black bg-opacity-50 p-6 rounded-lg text-center text-white max-w-2xl md:p-10">
-                    <h1 className="text-3xl font-bold mb-4 md:text-5xl">Empowering Your Financial Future</h1>
-                    <p className="text-sm mb-8 md:text-lg">
-                        Welcome to our platform where you can manage your financial goals and apply for loans with ease.
-                         Whether you need a personal loan, mortgage, or funding for your business, we're here to make financial services accessible and straightforward for everyone.
-                    </p>
-                    <button
-                        onClick={handleRegisterClick}
-                        disabled={user}
-                        className={`btn btn-primary ${user ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} md:px-6 md:py-2`}
-                    >
-                        {user ? 'Registered' : 'Apply Now'}
-                    </button>
-                    <Footer />
-                </div>
-            </main>
-        </div>
-    );
-};
+//     return (
+//         <div className="min-h-screen flex flex-col items-center justify-center">
+//             <main
+//                 className="flex-grow flex flex-col items-center justify-center bg-cover bg-center mt-16 p-4 rounded-lg"
+//                 style={{
+//                     backgroundImage: `url(${backgrounds[activeIndex]})`,
+//                     minHeight: '100vh',
+//                     backgroundSize: 'cover',
+//                     backgroundRepeat: 'no-repeat',
+//                     backgroundPosition: 'center center',
+//                     display: 'flex',
+//                     alignItems: 'center',
+//                     textAlign: 'center'
+//                 }}
+//             >
+//                 <div className="bg-black bg-opacity-50 p-6 rounded-lg text-center text-white max-w-2xl md:p-10">
+//                     <h1 className="text-3xl font-bold mb-4 md:text-5xl">Empowering Your Financial Future</h1>
+//                     <p className="text-sm mb-8 md:text-lg">
+//                         Welcome to our platform where you can manage your financial goals and apply for loans with ease.
+//                          Whether you need a personal loan, mortgage, or funding for your business, we're here to make financial services accessible and straightforward for everyone.
+//                     </p>
+//                     <button
+//                         onClick={handleRegisterClick}
+//                         disabled={user}
+//                         className={`btn btn-primary ${user ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} md:px-6 md:py-2`}
+//                     >
+//                         {user ? 'Registered' : 'Apply Now'}
+//                     </button>
+//                     <Footer />
+//                 </div>
+//             </main>
+//         </div>
+//     );
+// };
 
-export default Home;
+// export default Home;
 
 // import React from 'react';
 // import { useAuth } from "../context/AuthContext";
@@ -319,3 +319,395 @@ export default Home;
 //     </div>
 //   );
 // }
+// import React, { useState } from 'react';
+// import { Container, Row, Col, Button, Card, CardBody, CardTitle, CardText } from 'reactstrap';
+
+// const Home = () => {
+//     const [showLearnMore, setShowLearnMore] = useState(false);
+
+//     const handleLearnMoreClick = () => {
+//         setShowLearnMore(!showLearnMore);
+//     };
+
+//     return (
+//         <div>
+//             {/* Hero Section */}
+//             <Card
+//                 className="hero text-center bg-primary text-white"
+//                 style={{
+//                     padding: '60px 20px', // Adjust padding for size
+//                     marginBottom: '30px',
+//                     backgroundSize: 'cover',
+//                     backgroundPosition: 'center',
+//                     height: '400px', // Adjust height for size
+//                 }}
+//             >
+//                 <CardBody>
+//                     <CardTitle tag="h1" className="display-4">Welcome to MoneyMinder</CardTitle>
+//                     <CardText className="lead">Your trusted partner in managing finances and achieving financial goals.</CardText>
+                    
+//                     <Button color="primary" onClick={handleLearnMoreClick}>
+//                         {showLearnMore ? 'Hide Details' : 'Learn More'}
+//                     </Button>
+//                 </CardBody>
+//             </Card>
+
+//             {/* Learn More Section */}
+//             {showLearnMore && (
+//                 <section
+//                     id="learn-more"
+//                     style={{
+//                         backgroundColor: '#f8f9fa',
+//                         padding: '50px 0'
+//                     }}
+//                 >
+//                     <Container>
+//                         <h2 className="text-center mb-4">Learn More About MoneyMinder</h2>
+//                         <Row>
+//                             <Col md="6" className="mb-4">
+//                                 <Card>
+//                                     <CardBody>
+//                                         <h4 className="card-title">What We Do</h4>
+//                                         <p className="card-text">
+//                                             MoneyMinder provides a comprehensive loan management system to help you handle your loans effortlessly. From application to approval, our platform simplifies every step.
+//                                         </p>
+//                                     </CardBody>
+//                                 </Card>
+//                             </Col>
+//                             <Col md="6" className="mb-4">
+//                                 <Card>
+//                                     <CardBody>
+//                                         <h4 className="card-title">Why Choose Us?</h4>
+//                                         <p className="card-text">
+//                                             Our user-friendly interface, transparent processes, and customer-centric approach make us the ideal choice for managing your financial needs.
+//                                         </p>
+//                                     </CardBody>
+//                                 </Card>
+//                             </Col>
+//                         </Row>
+//                     </Container>
+//                 </section>
+//             )}
+
+//               {/* Features Section */}
+//               <section
+//                 id="features"
+//                 style={{
+//                     backgroundColor: '#ffffff',
+//                     padding: '50px 0'
+//                 }}
+//             >
+//                 <Container>
+//                     <h2 className="text-center mb-4">Our Features</h2>
+//                     <Row>
+//                         <Col md="4" className="mb-4">
+//                             <Card>
+//                                 <CardBody>
+//                                     <h5 className="card-title">Easy Loan Management</h5>
+//                                     <p className="card-text">Manage your loans efficiently with our user-friendly interface.</p>
+//                                 </CardBody>
+//                             </Card>
+//                         </Col>
+//                         <Col md="4" className="mb-4">
+//                             <Card>
+//                                 <CardBody>
+//                                     <h5 className="card-title">Secure Transactions</h5>
+//                                     <p className="card-text">Ensure your transactions are secure with our top-notch security features.</p>
+//                                 </CardBody>
+//                             </Card>
+//                         </Col>
+//                         <Col md="4" className="mb-4">
+//                             <Card>
+//                                 <CardBody>
+//                                     <h5 className="card-title">24/7 Support</h5>
+//                                     <p className="card-text">Get support anytime with our dedicated customer service team.</p>
+//                                 </CardBody>
+//                             </Card>
+//                         </Col>
+//                     </Row>
+//                 </Container>
+//             </section>
+
+            
+//            {/* Testimonials Section */}
+// {/* Testimonials Section */}
+
+// {/* Testimonials Section */}
+// <section
+//     id="testimonials"
+//     style={{
+//         backgroundColor: '#007bff', // Background color for the section
+//         color: '#fff', // Text color
+//         padding: '50px 0', // Padding to create space inside the section
+//         minHeight: '400px', // Minimum height of the section
+//         width: '100%', // Ensure the section spans full width
+//         boxSizing: 'border-box', // Include padding and border in the element's total width and height
+//         display: 'flex', // Flexbox to center content
+//         alignItems: 'center', // Center items vertically
+//         justifyContent: 'center' // Center items horizontally
+//     }}
+// >
+//     <Container>
+//         <h2 className="text-center mb-4">What Our Users Say</h2>
+//         <Row>
+//             <Col md="4" className="mb-4">
+//                 <Card>
+//                     <CardBody>
+//                         <blockquote className="blockquote mb-0">
+//                             <p>"MoneyMinder has completely transformed the way I manage my finances. Highly recommend!"</p>
+//                             <footer className="blockquote-footer">John Doe</footer>
+//                         </blockquote>
+//                     </CardBody>
+//                 </Card>
+//             </Col>
+//             <Col md="4" className="mb-4">
+//                 <Card>
+//                     <CardBody>
+//                         <blockquote className="blockquote mb-0">
+//                             <p>"The loan management features are intuitive and easy to use. It’s a game-changer!"</p>
+//                             <footer className="blockquote-footer">Jane Smith</footer>
+//                         </blockquote>
+//                     </CardBody>
+//                 </Card>
+//             </Col>
+//             <Col md="4" className="mb-4">
+//                 <Card>
+//                     <CardBody>
+//                         <blockquote className="blockquote mb-0">
+//                             <p>"Excellent customer service and a very secure platform. I feel confident managing my finances here."</p>
+//                             <footer className="blockquote-footer">Michael Johnson</footer>
+//                         </blockquote>
+//                     </CardBody>
+//                 </Card>
+//             </Col>
+//         </Row>
+//     </Container>
+// </section>
+
+//             {/* Contact Section */}
+//             <section
+//                 id="contact"
+//                 style={{
+//                     backgroundColor: '#f1f1f1',
+//                     padding: '50px 0'
+//                 }}
+//             >
+//                 <Container>
+//                     <h2 className="text-center mb-4">Get In Touch</h2>
+//                     <Row>
+//                         <Col md="6">
+//                             <h4>Contact Us</h4>
+//                             <p>If you have any questions, feel free to reach out to us.</p>
+//                             <p>Email: support@moneyminder.com</p>
+//                             <p>Phone: +123 456 7890</p>
+//                         </Col>
+//                         <Col md="6">
+//                             <h4>Visit Us</h4>
+//                             <p>Our office is located at:</p>
+//                             <p>123 Financial Street, Suite 100</p>
+//                             <p>Money City, FC 12345</p>
+//                         </Col>
+//                     </Row>
+//                 </Container>
+//             </section>
+//         </div>
+//     );
+// };
+
+// export default Home
+
+
+import React, { useState } from 'react';
+import { Container, Row, Col, Button, Card, CardBody, CardTitle, CardText } from 'reactstrap';
+
+const Home = () => {
+    const [showLearnMore, setShowLearnMore] = useState(false);
+
+    const handleLearnMoreClick = () => {
+        setShowLearnMore(!showLearnMore);
+    };
+
+    return (
+        <div>
+            {/* Hero Section */}
+            <Card
+                className="hero text-center bg-primary text-white"
+                style={{
+                    padding: '60px 20px',
+                    marginBottom: '0', // Ensure there's no extra margin
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    height: '400px',
+                    border: 'none' // Ensure no border adds extra spacing
+                }}
+            >
+                <CardBody>
+                    <CardTitle tag="h1" className="display-4">Welcome to MoneyMinder</CardTitle>
+                    <CardText className="lead">Your trusted partner in managing finances and achieving financial goals.</CardText>
+                    
+                    <Button color="primary" onClick={handleLearnMoreClick}>
+                        {showLearnMore ? 'Hide Details' : 'Learn More'}
+                    </Button>
+                </CardBody>
+            </Card>
+
+            {/* Learn More Section */}
+            {showLearnMore && (
+                <section
+                    id="learn-more"
+                    style={{
+                        backgroundColor: '#e0f4f1',
+                        padding: '50px 20px', // Ensure padding is consistent
+                        margin: '0' // Remove default margins
+                    }}
+                >
+                    <Container>
+                        <h2 className="text-center mb-4">Learn More About MoneyMinder</h2>
+                        <Row>
+                            <Col md="6" className="mb-4">
+                                <Card>
+                                    <CardBody>
+                                        <h4 className="card-title">What We Do</h4>
+                                        <p className="card-text">
+                                            MoneyMinder provides a comprehensive loan management system to help you handle your loans effortlessly. From application to approval, our platform simplifies every step.
+                                        </p>
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                            <Col md="6" className="mb-4">
+                                <Card>
+                                    <CardBody>
+                                        <h4 className="card-title">Why Choose Us?</h4>
+                                        <p className="card-text">
+                                            Our user-friendly interface, transparent processes, and customer-centric approach make us the ideal choice for managing your financial needs.
+                                        </p>
+                                    </CardBody>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Container>
+                </section>
+            )}
+
+            {/* Features Section */}
+            <section
+                id="features"
+                style={{
+                    backgroundColor: '#e0f4ff',
+                    padding: '80px 20px', // Ensure padding is consistent
+                    margin: '0' // Remove default margins
+                }}
+            >
+                <Container>
+                    <h2 className="text-center mb-4">Our Features</h2>
+                    <Row>
+                        <Col md="4" className="mb-4">
+                            <Card>
+                                <CardBody>
+                                    <h5 className="card-title">Easy Loan Management</h5>
+                                    <p className="card-text">Manage your loans efficiently with our user-friendly interface.</p>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col md="4" className="mb-4">
+                            <Card>
+                                <CardBody>
+                                    <h5 className="card-title">Secure Transactions</h5>
+                                    <p className="card-text">Ensure your transactions are secure with our top-notch security features.</p>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col md="4" className="mb-4">
+                            <Card>
+                                <CardBody>
+                                    <h5 className="card-title">24/7 Support</h5>
+                                    <p className="card-text">Get support anytime with our dedicated customer service team.</p>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </section>
+
+            {/* Testimonials Section */}
+            <section
+                id="testimonials"
+                style={{
+                    backgroundColor: '#007bff',
+                    color: '#fff',
+                    padding: '50px 20px', // Ensure padding is consistent
+                    margin: '0', // Remove default margins
+                    minHeight: '400px',
+                    width: '100%',
+                    boxSizing: 'border-box'
+                }}
+            >
+                <Container>
+                    <h2 className="text-center mb-4">What Our Users Say</h2>
+                    <Row>
+                        <Col md="4" className="mb-4">
+                            <Card>
+                                <CardBody>
+                                    <blockquote className="blockquote mb-0">
+                                        <p>"MoneyMinder has completely transformed the way I manage my finances. Highly recommend!"</p>
+                                        <footer className="blockquote-footer">John Doe</footer>
+                                    </blockquote>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col md="4" className="mb-4">
+                            <Card>
+                                <CardBody>
+                                    <blockquote className="blockquote mb-0">
+                                        <p>"The loan management features are intuitive and easy to use. It’s a game-changer!"</p>
+                                        <footer className="blockquote-footer">Jane Smith</footer>
+                                    </blockquote>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col md="4" className="mb-4">
+                            <Card>
+                                <CardBody>
+                                    <blockquote className="blockquote mb-0">
+                                        <p>"Excellent customer service and a very secure platform. I feel confident managing my finances here."</p>
+                                        <footer className="blockquote-footer">Michael Johnson</footer>
+                                    </blockquote>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </section>
+
+            {/* Contact Section */}
+            <section
+                id="contact"
+                style={{
+                    backgroundColor: '#e0f4ff',
+                    padding: '50px 20px', // Ensure padding is consistent
+                    margin: '0' // Remove default margins
+                }}
+            >
+                <Container>
+                    <h2 className="text-center mb-4">Get In Touch</h2>
+                    <Row>
+                        <Col md="6">
+                            <h4>Contact Us</h4>
+                            <p>If you have any questions, feel free to reach out to us.</p>
+                            <p>Email: support@moneyminder.com</p>
+                            <p>Phone: +123 456 7890</p>
+                        </Col>
+                        <Col md="6">
+                            <h4>Visit Us</h4>
+                            <p>Our office is located at:</p>
+                            <p>123 Financial Street, Suite 100</p>
+                            <p>Money City, FC 12345</p>
+                        </Col>
+                    </Row>
+                </Container>
+            </section>
+        </div>
+    );
+};
+
+export default Home;
