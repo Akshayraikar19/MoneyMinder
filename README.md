@@ -22,15 +22,7 @@ The Loan Management System is a comprehensive platform designed to streamline th
 - npm or Yarn
 - MongoDB (for database)
 
-- ## Install dependencies
-- npm install
-# or
-yarn install
 
-##Run application
-npm start
-# or
-yarn start
 
 
 ### Clone the Repository
