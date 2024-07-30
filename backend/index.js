@@ -20,11 +20,15 @@ const port = 4444
 
 // CORS configuration
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
+    origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend-lxmc48yu5.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
 }));
+
+app.use(express.json());
+// Define routes after CORS middleware
+
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
