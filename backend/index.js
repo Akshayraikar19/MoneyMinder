@@ -16,6 +16,19 @@ nodeCronCtlr()
 
 const app = express()
 const port = 4444
+
+
+// CORS configuration
+app.use(cors({
+    origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+}));
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(express.json())// Enable CORS for all origins and allow PUT method
 
 // app.use(cors())
@@ -33,15 +46,9 @@ app.use(express.json())// Enable CORS for all origins and allow PUT method
 // }));
 
 
-// CORS configuration
-app.use(cors({
-    origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,  // Enable credentials with CORS
-}));
 
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+
 
 app.use(express.urlencoded({ extended: false }));
 // Serve static files from the 'uploads' directory
