@@ -2,9 +2,10 @@ import axios from '../config/axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddLoan() {
-
+   const navigate = useNavigate()
     const loanTypes = [
         { name: 'Home Loan', value: 'HomeLoan' },
         { name: 'Car Loan', value: 'CarLoan' },
@@ -36,6 +37,7 @@ export default function AddLoan() {
                 });
                 console.log(response.data);
                 toast.success('Loan created successfully');
+                navigate('/loan-list')
                 resetForm();
             } catch (error) {
                 console.log('Error', error);

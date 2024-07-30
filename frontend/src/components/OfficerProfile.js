@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from '../config/axios';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const OfficerProfile = () => {
+    const navigate = useNavigate()
     const [form, setForm] = useState({
         firstName: '',
         lastName: '',
@@ -142,6 +144,7 @@ const OfficerProfile = () => {
 
             setProfileData(response.data);
             toast.success('Profile saved successfully');
+            navigate('/account')
         } catch (error) {
             if (error.response) {
                 // Detailed error handling

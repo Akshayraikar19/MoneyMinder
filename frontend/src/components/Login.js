@@ -249,7 +249,7 @@ export default function Login() {
             try {
                 let loginData = { password: values.password };
 
-                // Determine which identifier was used (email, username, or phone)
+                // Determining which identifier was used (email, username, or phone)
                 if (values.identifier.includes('@')) {
                     loginData.email = values.identifier;
                 } else if (/^\d+$/.test(values.identifier)) {
@@ -272,7 +272,7 @@ export default function Login() {
                 toast.success('Login Success', {
                     autoClose: 1000,
                     onClose: () => {
-                        navigate('/');
+                        navigate('/loan-list');
                     },
                 });
             } catch (err) {

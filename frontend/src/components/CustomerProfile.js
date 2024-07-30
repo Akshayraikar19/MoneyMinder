@@ -317,8 +317,10 @@ import axios from '../config/axios';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { format, parse } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 const CustomerProfile = () => {
+    const navigate = useNavigate()
     const [form, setForm] = useState({
         firstName: '',
         lastName: '',
@@ -476,6 +478,7 @@ const CustomerProfile = () => {
 
             setProfileData(response.data);
             toast.success('Profile saved successfully');
+            navigate('/account')
         } catch (error) {
             if (error.response) {
                 // Detailed error handling

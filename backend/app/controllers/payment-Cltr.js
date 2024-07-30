@@ -169,7 +169,7 @@ paymentCltr.payOffline = async (req, res) => {
 
 paymentCltr.OfflinePayments = async (req, res) => {
     try {
-        const payment = await Payment.findOne({ applicationId: req.params.applicationId, mode: "offline" })
+        const payment = await Payment.findOne({ applicationId: req.params.applicationId, mode: "offline" }).sort({ paymentDate: -1 });
         
         console.log(payment); // Add this line to debug
 
@@ -276,7 +276,7 @@ paymentCltr.OfflinePayments = async (req, res) => {
 
 
 paymentCltr.verifyOfflinePayment = async (req, res) => {
-    const id = req.params.applicationId;
+    const id = req.params.applicationId; // This line is causing the issue
 
     try {
         console.log('Processing payment with ID:', id);
@@ -284,7 +284,7 @@ paymentCltr.verifyOfflinePayment = async (req, res) => {
         // Find the payment in offline mode
         const payment = await Payment.findOne({ applicationId: id, mode: 'offline' }).sort({ paymentDate: -1 });
         if (!payment) {
-            return res.status(404).json({ error:'No offline payment record found for this application' });
+            return res.status(404).json({ error: 'No offline payment record found for this application' });
         }
 
         // Check if the payment is already verified
@@ -325,6 +325,7 @@ paymentCltr.verifyOfflinePayment = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 
 
 // paymentCltr.list = async(req,res) => {

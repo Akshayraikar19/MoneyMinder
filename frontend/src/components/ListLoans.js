@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import axios from "../config/axios";
-import bg3 from "../assets/images/bg3.jpg";
+import images from "../assets/images/images.jpg";
 import { Container, Row, Col, ListGroup, ListGroupItem, Button } from 'reactstrap';
 
 const ListLoan = () => {
@@ -20,7 +20,7 @@ const ListLoan = () => {
 
     return (
         <div style={{
-            backgroundImage: `url(${bg3})`,
+            backgroundImage: `url(${images})`,
             backgroundSize: 'cover',
             minHeight: '100vh',
             paddingTop: '80px', // Adjust padding top to move content down if needed
