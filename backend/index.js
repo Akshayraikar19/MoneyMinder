@@ -18,15 +18,28 @@ const app = express()
 const port = 4444
 app.use(express.json())// Enable CORS for all origins and allow PUT method
 
+// app.use(cors())
+// app.use(cors({
+//     origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
+//   }));
+  
+  
+// // Enable CORS for all origins and allow required methods and headers
+// app.use(cors({
+//   origin: 'http://localhost:3000',
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+//   credentials: true,  // enable set cookie with CORS
+// }));
 
-// Enable CORS for all origins and allow required methods and headers
+
+// CORS configuration
 app.use(cors({
-  origin: 'http://localhost:3000',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,  // enable set cookie with CORS
+    origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,  // Enable credentials with CORS
 }));
-
 
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
