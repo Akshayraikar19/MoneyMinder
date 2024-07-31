@@ -20,7 +20,7 @@ const port = 4444
 
 // CORS configuration
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://vercel.com'],
+    origin: ['http://localhost:3000', 'http://money-minder-loan-app-frontend.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
