@@ -20,7 +20,7 @@ const port = 4444
 
 // CORS configuration
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
+    origin: ['http://localhost:3000', 'https://vercel.com'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
@@ -35,38 +35,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json())// Enable CORS for all origins and allow PUT method
 
-// app.use(cors())
-// app.use(cors({
-//     origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
-//   }));
-  
-  
-// // Enable CORS for all origins and allow required methods and headers
-// app.use(cors({
-//   origin: 'http://localhost:3000',
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-//   credentials: true,  // enable set cookie with CORS
-// }));
 
-// Serve static files
 
 
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 
 app.use(express.urlencoded({ extended: false }));
-// Serve static files from the 'uploads' directory
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
-//     // Ensure CORS headers allow the specified origin and credentials
-//     setHeaders: (res, path, stat) => {
-//       res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-//       res.set('Access-Control-Allow-Credentials', 'true');
-//     },
-//   }));
 
-// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
-// app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use(compression({
     level: 6,
@@ -255,4 +231,29 @@ app.listen(port, () => {
 })
 
 
+// Serve static files from the 'uploads' directory
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+//     // Ensure CORS headers allow the specified origin and credentials
+//     setHeaders: (res, path, stat) => {
+//       res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+//       res.set('Access-Control-Allow-Credentials', 'true');
+//     },
+//   }));
 
+// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+// app.use(morgan('combined', { stream: accessLogStream }));
+// app.use(cors())
+// app.use(cors({
+//     origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
+//   }));
+  
+  
+// // Enable CORS for all origins and allow required methods and headers
+// app.use(cors({
+//   origin: 'http://localhost:3000',
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+//   credentials: true,  // enable set cookie with CORS
+// }));
+
+// Serve static files
