@@ -1,136 +1,75 @@
-// require('dotenv').config()
-// const express = require('express')
-// const configureDB = require('./config/db')
-// configureDB()
-// const {checkSchema} = require('express-validator')
-// const compression = require('compression')
-// const helmet = require('helmet')
-// const path = require('path');
+require('dotenv').config()
+const express = require('express')
+const configureDB = require('./config/db')
+configureDB()
+const {checkSchema} = require('express-validator')
+const compression = require('compression')
+const helmet = require('helmet')
+const path = require('path');
 // const morgan = require('morgan')
-// const cors = require('cors')
+const cors = require('cors')
 // const fs = require('fs');
 
-// const nodeCronCtlr = require('./app/utils/cronJob')
-// nodeCronCtlr()
+const nodeCronCtlr = require('./app/utils/cronJob')
+nodeCronCtlr()
 
 
-// const app = express()
-// const port = 4444
+const app = express()
+const port = 4444
 
-
-// // CORS configuration
-// app.use(cors({
-//     origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app/'],
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-//     credentials: true,
-// }));
-
-// app.use(express.json());
-// // Define routes after CORS middleware
-
-
-// // Serve static files
-// app.use(express.static(path.join(__dirname, 'public')));
-
-// app.use(express.json())// Enable CORS for all origins and allow PUT method
-
-// // app.use(cors())
-// // app.use(cors({
-// //     origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
-// //   }));
-  
-  
-// // // Enable CORS for all origins and allow required methods and headers
-// // app.use(cors({
-// //   origin: 'http://localhost:3000',
-// //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-// //   allowedHeaders: ['Content-Type', 'Authorization'],
-// //   credentials: true,  // enable set cookie with CORS
-// // }));
-
-
-
-// app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-
-
-// app.use(express.urlencoded({ extended: false }));
-// // Serve static files from the 'uploads' directory
-// // app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
-// //     // Ensure CORS headers allow the specified origin and credentials
-// //     setHeaders: (res, path, stat) => {
-// //       res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-// //       res.set('Access-Control-Allow-Credentials', 'true');
-// //     },
-// //   }));
-
-// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
-// app.use(morgan('combined', { stream: accessLogStream }));
-
-// app.use(compression({
-//     level: 6,
-//     threshold: 100 * 1000,  
-//     filter: (req, res) => {
-//         if (req.headers['x-no-compression']) {
-//             return false;
-//         }
-//         return compression.filter(req, res);
-//     }
-// }));
-
-
-
-// const upload = require('./app/middlewares/multer')
-
-
-// //application level middleware - using it for logging request for debug purpose
-// app.use(function(req, res, next){
-//     console.log(`${req.ip} - ${req.method} - ${req.url} - ${new Date()}`)
-//     next()
-// })
-require('dotenv').config();
-const express = require('express');
-const configureDB = require('./config/db');
-configureDB();
-const { checkSchema } = require('express-validator');
-const compression = require('compression');
-const helmet = require('helmet');
-const path = require('path');
-const morgan = require('morgan');
-const cors = require('cors');
-
-const nodeCronCtlr = require('./app/utils/cronJob');
-nodeCronCtlr();
-
-const app = express();
-const port = 4444;
 
 // CORS configuration
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
+    origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app/'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
 }));
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+// Define routes after CORS middleware
+
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-const morganStream = {
-    write: (message) => {
-        // You can log to an external service here
-        console.log(message);
-    },
-};
-app.use(morgan('combined', { stream: morganStream }));
+app.use(express.json())// Enable CORS for all origins and allow PUT method
+
+// app.use(cors())
+// app.use(cors({
+//     origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
+//   }));
+  
+  
+// // Enable CORS for all origins and allow required methods and headers
+// app.use(cors({
+//   origin: 'http://localhost:3000',
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+//   credentials: true,  // enable set cookie with CORS
+// }));
+
+
+
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+
+
+app.use(express.urlencoded({ extended: false }));
+// Serve static files from the 'uploads' directory
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+//     // Ensure CORS headers allow the specified origin and credentials
+//     setHeaders: (res, path, stat) => {
+//       res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+//       res.set('Access-Control-Allow-Credentials', 'true');
+//     },
+//   }));
+
+// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+// app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use(compression({
     level: 6,
-    threshold: 100 * 1000,
+    threshold: 100 * 1000,  
     filter: (req, res) => {
         if (req.headers['x-no-compression']) {
             return false;
@@ -139,13 +78,17 @@ app.use(compression({
     }
 }));
 
-const upload = require('./app/middlewares/multer');
 
-// Application level middleware - using it for logging requests for debug purposes
-app.use((req, res, next) => {
-    console.log(`${req.ip} - ${req.method} - ${req.url} - ${new Date()}`);
-    next();
-});
+
+const upload = require('./app/middlewares/multer')
+
+
+//application level middleware - using it for logging request for debug purpose
+app.use(function(req, res, next){
+    console.log(`${req.ip} - ${req.method} - ${req.url} - ${new Date()}`)
+    next()
+})
+
 
 const authenticateUser = require('./app/middlewares/authenticateUser')
 const authorizeUser = require('./app/middlewares/authorizeUser')
