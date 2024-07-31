@@ -49,6 +49,13 @@ app.use(express.json())// Enable CORS for all origins and allow PUT method
 //   credentials: true,  // enable set cookie with CORS
 // }));
 
+// Serve static files
+
+
+// Define routes
+app.get('/', (req, res) => {
+    res.send('Welcome to the Money Minder Loan App!');
+});
 
 
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
