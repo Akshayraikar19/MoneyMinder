@@ -7,12 +7,10 @@
 import axios from "axios";
 
 // console.log('API Base URL:', process.env.REACT_APP_API_BASE_URL);
- axios.defaults.withCredentials = true
+
 export default axios.create({
-    baseURL: money-minder-backend.vercel.app
+    baseURL: process.env.REACT_APP_API_BASE_URL // This will be replaced by the environment variable
 });
-
-
 
 // import axios from 'axios';
 
