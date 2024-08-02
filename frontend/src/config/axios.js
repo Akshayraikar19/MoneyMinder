@@ -9,7 +9,8 @@ import axios from "axios";
 // console.log('API Base URL:', process.env.REACT_APP_API_BASE_URL);
 
 export default axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL // This will be replaced by the environment variable
+    baseURL: process.env.REACT_APP_API_BASE_URL,
+    withCredentials: true,
 });
 
 // import axios from 'axios';
