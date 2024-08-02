@@ -1,22 +1,17 @@
-require('dotenv').config()
-const express = require('express')
-const configureDB = require('./config/db')
-configureDB()
-const {checkSchema} = require('express-validator')
-const compression = require('compression')
-const helmet = require('helmet')
+const express = require('express');
+const configureDB = require('./config/db');
+configureDB();
+const { checkSchema } = require('express-validator');
+const compression = require('compression');
+const helmet = require('helmet');
 const path = require('path');
-// const morgan = require('morgan')
-const cors = require('cors')
-// const fs = require('fs');
+const cors = require('cors');
 
-const nodeCronCtlr = require('./app/utils/cronJob')
-nodeCronCtlr()
+const nodeCronCtlr = require('./app/utils/cronJob');
+nodeCronCtlr();
 
-
-const app = express()
-const port = 4444
-
+const app = express();
+const port = 4444;
 
 // CORS configuration
 app.use(cors({
@@ -26,27 +21,13 @@ app.use(cors({
     credentials: true,
 }));
 
+// Middleware
 app.use(express.json());
-// Define routes after CORS middleware
-
-
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(express.json())// Enable CORS for all origins and allow PUT method
-
-
-
-
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-
-
 app.use(express.urlencoded({ extended: false }));
-
-
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(compression({
     level: 6,
-    threshold: 100 * 1000,  
+    threshold: 100 * 1000,
     filter: (req, res) => {
         if (req.headers['x-no-compression']) {
             return false;
@@ -54,8 +35,6 @@ app.use(compression({
         return compression.filter(req, res);
     }
 }));
-
-
 
 const upload = require('./app/middlewares/multer')
 
