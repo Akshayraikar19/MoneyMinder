@@ -14,12 +14,14 @@ const app = express();
 const port = 4444;
 
 // CORS configuration
+
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://money-minder-loan-app-frontend.vercel.app'],
+    origin: ['https://money-minder-loan-app-frontend.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
 }));
+
 
 // Middleware
 app.use(express.json());
