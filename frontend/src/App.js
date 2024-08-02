@@ -5,7 +5,7 @@ import { Navbar, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstr
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { useSelector } from 'react-redux';
-import axios from './config/axios';
+import axios from "./config/axios"
 import { useAuth } from './context/AuthContext';
 
 import Home from './components/Home';
@@ -38,7 +38,9 @@ import PaymentDetails from './components/adminDashboard/payments';
 import VerifyOfflinePayment from './components/adminDashboard/offlinePayment';
 import Unauthorized from './components/Unauthorized';
 
+
 function App() {
+  console.log('API Base URL:', process.env.REACT_APP_API_BASE_URL); // Log to verify the value
   const { user, handleLogin, handleLogout } = useAuth();
   const email = useSelector((state) => state.forgot.email);
   const [isOpen, setIsOpen] = useState(false);

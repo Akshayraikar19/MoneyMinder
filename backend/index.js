@@ -223,8 +223,8 @@ app.get('/admin/approved/applications', authenticateUser, authorizeUser(['admin'
  app.get('/payments/application/:applicationId', authenticateUser, authorizeUser(['admin']), paymentCltr.listByApplicationId)
 
 
- app.get('/loans-sanctions', authenticateUser, authorizeUser(['admin']), applicationsCltr.loanSanctions)
- app.get('/loans-retentions', authenticateUser, authorizeUser(['admin']), applicationsCltr.loanretentions)
+//  app.get('/loans-sanctions', authenticateUser, authorizeUser(['admin']), applicationsCltr.loanSanctions)
+//  app.get('/loans-retentions', authenticateUser, authorizeUser(['admin']), applicationsCltr.loanretentions)
 
 app.listen(port, () => {
     console.log('server running on port', port)

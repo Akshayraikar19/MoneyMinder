@@ -223,8 +223,8 @@ ChartJS.register(Title, Tooltip, Legend, LineElement, BarElement, CategoryScale,
 const UnverifiedOfficers = () => {
     const [unverifiedOfficers, setUnverifiedOfficers] = useState([]);
     const [verifiedOfficers, setVerifiedOfficers] = useState([]);
-    const [sanctions, setSanctions] = useState([]);
-    const [retentionRate, setRetentionRate] = useState(null);
+    // const [sanctions, setSanctions] = useState([]);
+    // const [retentionRate, setRetentionRate] = useState(null);
 
     useEffect(() => {
         const fetchUnverifiedOfficers = async () => {
@@ -253,63 +253,63 @@ const UnverifiedOfficers = () => {
             }
         };
 
-        const fetchLoanSanctions = async () => {
-            try {
-                const response = await axios.get('/loans-sanctions', {
-                    headers: {
-                        Authorization: localStorage.getItem('token'),
-                    },
-                });
-                setSanctions(response.data);
-            } catch (error) {
-                console.error('Error fetching loan sanctions:', error);
-            }
-        };
+        // const fetchLoanSanctions = async () => {
+        //     try {
+        //         const response = await axios.get('/loans-sanctions', {
+        //             headers: {
+        //                 Authorization: localStorage.getItem('token'),
+        //             },
+        //         });
+        //         setSanctions(response.data);
+        //     } catch (error) {
+        //         console.error('Error fetching loan sanctions:', error);
+        //     }
+        // };
 
-        const fetchLoanRetentions = async () => {
-            try {
-                const response = await axios.get('/loans-retentions', {
-                    headers: {
-                        Authorization: localStorage.getItem('token'),
-                    },
-                });
-                setRetentionRate(response.data.retentionRate);
-            } catch (error) {
-                console.error('Error fetching loan retentions:', error);
-            }
-        };
+        // const fetchLoanRetentions = async () => {
+        //     try {
+        //         const response = await axios.get('/loans-retentions', {
+        //             headers: {
+        //                 Authorization: localStorage.getItem('token'),
+        //             },
+        //         });
+        //         setRetentionRate(response.data.retentionRate);
+        //     } catch (error) {
+        //         console.error('Error fetching loan retentions:', error);
+        //     }
+        // };
 
         fetchUnverifiedOfficers();
         fetchVerifiedOfficers();
-        fetchLoanSanctions();
-        fetchLoanRetentions();
+        // fetchLoanSanctions();
+        // fetchLoanRetentions();
     }, []);
 
-    const sanctionsChartData = {
-        labels: sanctions.map(sanction => `Month ${sanction._id.month}/${sanction._id.year}`),
-        datasets: [
-            {
-                label: 'Loan Sanctions',
-                data: sanctions.map(sanction => sanction.count),
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1,
-            },
-        ],
-    };
+    // const sanctionsChartData = {
+    //     labels: sanctions.map(sanction => `Month ${sanction._id.month}/${sanction._id.year}`),
+    //     datasets: [
+    //         {
+    //             label: 'Loan Sanctions',
+    //             data: sanctions.map(sanction => sanction.count),
+    //             backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    //             borderColor: 'rgba(75, 192, 192, 1)',
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
-    const retentionChartData = {
-        labels: ['Retention Rate'],
-        datasets: [
-            {
-                label: 'Retention Rate (%)',
-                data: [retentionRate || 0],
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                borderWidth: 1,
-            },
-        ],
-    };
+    // const retentionChartData = {
+    //     labels: ['Retention Rate'],
+    //     datasets: [
+    //         {
+    //             label: 'Retention Rate (%)',
+    //             data: [retentionRate || 0],
+    //             backgroundColor: 'rgba(153, 102, 255, 0.2)',
+    //             borderColor: 'rgba(153, 102, 255, 1)',
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
     const handleVerify = async (userId) => {
         try {
@@ -403,20 +403,8 @@ const UnverifiedOfficers = () => {
                 )}
             </div>
 
-            <div className="mb-4">
-                <h2 className="text-center">Loan Sanctions</h2>
-                <div style={{ width: "80%", margin: "0 auto" }}>
-                    <Bar data={sanctionsChartData} options={{ responsive: true }} />
-                </div>
-            </div>
-
-            <div>
-                <h2 className="text-center">Loan Retention Rate</h2>
-                {/* <div style={{ width: "80%", maxWidth: "500px", margin: "0 auto" }}> */}
-                <div style={{ width: "80%", maxWidth: "600px", height: "400px", margin: "0 auto" }}>
-                    <Pie data={retentionChartData} options={{ responsive: true, maintainAspectRatio: false }} />
-                </div>
-            </div>
+        
+            
         </div>
     );
 };
