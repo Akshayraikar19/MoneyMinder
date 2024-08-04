@@ -185,96 +185,6 @@ paymentCltr.OfflinePayments = async (req, res) => {
 
  
 
-// paymentCltr.verifyOfflinePayment = async (req, res) => {
-//     // const id = req.params.id;
-//     // try {
-//     //     // Find the payment by ID and mode='offline'
-//     //     const payment = await Payment.findOneAndUpdate(
-//     //         { _id: id, mode: 'offline' },
-//     //         {
-//     //             $set: {
-//     //                 verifiedByAdmin: true,
-//     //                 paymentStatus: 'successful',
-//     //                 // Calculate nextEmiDueDate based on current value in application model
-//     //                 nextEmiDueDate: addMonths(new Date(), 1) // Default to current date + 1 month
-//     //             }
-//     //         },
-//     //         { new: true }
-//     //     );
-
-//     //     if (!payment) {
-//     //         return res.status(404).json({ error: 'Payment not found or not in offline mode' });
-//     //     }
-
-//     //     // Find the related application
-//     //     const application = await Application.findById(payment.applicationId);
-
-//     //     if (!application) {
-//     //         return res.status(404).json({ error: 'Application not found' });
-//     //     }
-
-//     //     // Calculate the new nextEmiDueDate based on the current value in the application
-//     //     const currentNextEmiDueDate = application.nextEmiDueDate || new Date();
-//     //     const newNextEmiDueDate = addMonths(currentNextEmiDueDate, 1);
-
-//     //     // Update both the application and payment documents with the new nextEmiDueDate
-//     //     application.nextEmiDueDate = newNextEmiDueDate;
-//     //     await application.save();
-
-//     //     payment.nextEmiDueDate = newNextEmiDueDate;
-//     //     await payment.save();
-
-//     //     res.json(payment);
-//     // } catch (err) {
-//     //     console.log(err);
-//     //     res.status(500).json({ error: 'Internal Server Error' });
-//     // }
-
-//     const { applicationId } = req.params;
-//     try {
-//         // Find the payment by ID and mode='offline'
-//         const payment = await Payment.findOneAndUpdate(
-//             { _id: applicationId, mode: 'offline' },
-//             {
-//                 $set: {
-//                     verifiedByAdmin: true,
-//                     paymentStatus: 'successful',
-//                     // Calculate nextEmiDueDate based on current value in application model
-//                 }
-//             },
-//             { new: true }
-//         );
-
-//         if (!payment) {
-//             return res.status(404).json({ error: 'Payment not found or not in offline mode' });
-//         }
-
-//         // Find the related application
-//         const application = await Application.findById(payment.applicationId);
-
-//         if (!application) {
-//             return res.status(404).json({ error: 'Application not found' });
-//         }
-
-//         // Calculate the new nextEmiDueDate based on the current value in the application
-//         const currentNextEmiDueDate = application.nextEmiDueDate || new Date();
-//         const newNextEmiDueDate = addMonths(currentNextEmiDueDate, 1);
-
-//         // Update both the application and payment documents with the new nextEmiDueDate
-//         application.nextEmiDueDate = newNextEmiDueDate;
-//         await application.save();
-
-//         payment.nextEmiDueDate = newNextEmiDueDate;
-//         await payment.save();
-
-//         res.json(payment);
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// };
-
-
 paymentCltr.verifyOfflinePayment = async (req, res) => {
     const id = req.params.applicationId; // This line is causing the issue
 
@@ -339,29 +249,6 @@ paymentCltr.verifyOfflinePayment = async (req, res) => {
 // }
 
 
-// paymentCltr.list = async (req, res) => {
-//     try {
-//         let response;
-
-//         if (req.user.role === 'admin') {
-//             const customerId = req.query.customerId; // Expect customerId to be passed as a query parameter for admin requests
-//             if (customerId) {
-//                 response = await Payment.find({ customer: customerId }).sort({ createdAt: -1 });
-//             } else {
-//                 return res.status(400).json({ error: "customerId query parameter is required for admin" });
-//             }
-//         } else if (req.user.role === 'customer') {
-//             response = await Payment.find({ customer: req.user.id }).sort({ createdAt: -1 });
-//         } else {
-//             return res.status(403).json({ error: "Unauthorized access" });
-//         }
-
-//         res.json(response);
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({ error: "Internal server error" });
-//     }
-// };
 
 paymentCltr.list = async (req, res) => {
     try {
@@ -455,21 +342,7 @@ paymentCltr.checkStatus = async(req, res) => {
     }
   }
 
-//   paymentCltr.listByApplicationId = async (req, res) => {
-//     try {
-//         const { applicationId } = req.params;
-//         const payments = await Payment.find({ applicationId }).sort({ createdAt: -1 });
-//         if(!payments) {
-//             return res.status(400).json({ error: 'record not found'})
-//         }
-//         const application = await Application.findById(applicationId).populate('customerProfile').populate('loan')
-//         res.json(application)
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({ error: "Internal server error" });
-//     }
-// };
-  
+
 
 paymentCltr.listByApplicationId = async (req, res) => {
     try {

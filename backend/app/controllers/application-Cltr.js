@@ -105,76 +105,87 @@ applicationsCltr.check = async(req, res) => {
   }
 }
 
-// applicationsCltr.loanSanctions = async (req, res) => {
-//     try {
-//         const startOfMonth = moment().startOf('month').toDate();
-//         const endOfMonth = moment().endOf('month').toDate();
+applicationsCltr.loanSanctions = async (req, res) => {
+    try {
+        // Set the start and end of the current year
+        const startOfYear = moment().startOf('year').startOf('day').toDate();
+        const endOfYear = moment().endOf('year').endOf('day').toDate();
         
-//         const sanctions = await Application.aggregate([
-//             {
-//                 $match: {
-//                     adminApprovedDate: { $gte: startOfMonth, $lte: endOfMonth },
-//                     status: 'approvedByAdmin'
-//                 }
-//             },
-//             {
-//                 $group: {
-//                     _id: { month: { $month: "$adminApprovedDate" }, year: { $year: "$adminApprovedDate" } },
-//                     count: { $sum: 1 }
-//                 }
-//             }
-//         ]);
+        console.log('Start of Year:', startOfYear);
+        console.log('End of Year:', endOfYear);
+        
+        const sanctions = await Application.aggregate([
+            {
+                $match: {
+                    adminApprovedDate: { $gte: startOfYear, $lte: endOfYear },
+                    status: 'approvedByAdmin'
+                }
+            },
+            {
+                $project: {
+                    year: { $year: "$adminApprovedDate" }
+                }
+            },
+            {
+                $group: {
+                    _id: "$year",
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+        
+        console.log('Sanctions Data:', sanctions);
+        res.status(200).json(sanctions);
+    } catch (error) {
+        console.error('Error fetching loan sanctions:', error);
+        res.status(500).json({ message: 'Error fetching loan sanctions', error });
+    }
+}
 
-//         // Send the sanctions data with a 200 status code
-//         res.status(200).json(sanctions);
-//     } catch (error) {
-//         // Log the error and send a 500 status code
-//         console.error('Error fetching loan sanctions:', error);
-//         res.status(500).json({ message: 'Error fetching loan sanctions', error });
-//     }
-// }
 
 
-// applicationsCltr.loanretentions = async (req, res) => {
-//     try {
-//         const startOfMonth = moment().startOf('month').toDate();
-//         const endOfMonth = moment().endOf('month').toDate();
+applicationsCltr.loanretentions = async (req, res) => {
+    try {
+        // Define the start and end of the year
+        const startOfYear = moment().startOf('year').toDate();
+        const endOfYear = moment().endOf('year').toDate();
 
-//         const totalSanctions = await Application.countDocuments({
-//             adminApprovedDate: { $gte: startOfMonth, $lte: endOfMonth },
-//             status: 'approvedByAdmin'
-//         });
+        // Get the total number of sanctions for the year
+        const totalSanctions = await Application.countDocuments({
+            adminApprovedDate: { $gte: startOfYear, $lte: endOfYear },
+            status: 'approvedByAdmin'
+        });
 
-//         const totalPayments = await Payment.aggregate([
-//             {
-//                 $lookup: {
-//                     from: 'applications',
-//                     localField: 'applicationId',
-//                     foreignField: '_id',
-//                     as: 'application'
-//                 }
-//             },
-//             { $unwind: '$application' },
-//             {
-//                 $match: {
-//                     'application.adminApprovedDate': { $gte: startOfMonth, $lte: endOfMonth },
-//                 }
-//             },
-//             {
-//                 $group: {
-//                     _id: { month: { $month: "$paymentDate" }, year: { $year: "$paymentDate" } },
-//                     count: { $sum: 1 }
-//                 }
-//             }
-//         ]);
+        // Aggregate payments for the year
+        const totalPayments = await Payment.aggregate([
+            {
+                $lookup: {
+                    from: 'applications',
+                    localField: 'applicationId',
+                    foreignField: '_id',
+                    as: 'application'
+                }
+            },
+            { $unwind: '$application' },
+            {
+                $match: {
+                    'application.adminApprovedDate': { $gte: startOfYear, $lte: endOfYear }
+                }
+            },
+            {
+                $group: {
+                    _id: { year: { $year: "$paymentDate" } },
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
 
-//         // Calculate retention rate (assuming retention rate is the percentage of payments compared to total sanctions)
-//         const retentionRate = totalSanctions ? (totalPayments[0]?.count || 0) / totalSanctions * 100 : 0;
+        // Calculate the retention rate (percentage of payments compared to total sanctions)
+        const retentionRate = totalSanctions ? (totalPayments[0]?.count || 0) / totalSanctions * 100 : 0;
 
-//         res.status(200).json({ retentionRate });
-//     } catch (error) {
-//         res.status(500).json({ message: 'Error fetching loan retentions', error });
-//     }
-// }
-
+        res.status(200).json({ retentionRate });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching loan retentions', error });
+    }
+};
 module.exports = applicationsCltr

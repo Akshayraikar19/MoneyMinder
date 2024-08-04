@@ -36,7 +36,7 @@ import OfflinePayment from './components/payments/offlinePayment';
 import ApprovedApplications from './components/adminDashboard/approvedApplications';
 import PaymentDetails from './components/adminDashboard/payments';
 import VerifyOfflinePayment from './components/adminDashboard/offlinePayment';
-import Unauthorized from './components/Unauthorized';
+
 
 
 function App() {
@@ -185,7 +185,7 @@ function App() {
         <Route path="/my-loans" element={<PrivateRoute permittedRoles={['officer']}><MyLoans /></PrivateRoute>} />
         <Route path="/api/loan/:loanId/edit" element={<EditLoan />} />
         <Route path="/api/loans/:id/view-applications" element={<LoanApplications />} />
-        <Route path="/unauthorized" element={<Unauthorized />} />
+       
         <Route path="/api/loans/:id/applications/:appId" element={<SingleApplication />} />
 
         <Route path="/officers-list" element={<PrivateRoute permittedRoles={['admin']}><UnverifiedOfficers /></PrivateRoute>} />
