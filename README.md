@@ -6,7 +6,7 @@ Money Minder is a comprehensive loan management system that allows users to appl
 
 - **Loan Application**: Apply for different types of loans including Car, Personal, Gold, Home, Education, and Housing Loans.
 - **Profile Management**: Create and manage user profiles with Aadhaar and PAN details.
-- **Payment Processing**: Pay processing fees and EMIs online using Stripe, or offline.
+- **Payment Processing**: Pay EMIs online using Stripe, or offline.
 - **Admin Dashboard**: Manage loan products, view and approve loan applications, and handle payment verifications.
 - **Notifications**: Implemented cronjob for monthly reminders for EMI payments.
 
