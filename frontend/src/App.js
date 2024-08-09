@@ -75,19 +75,23 @@ function App() {
           padding: '10px 20px', // Adjust padding for size
           height: '80px', // Adjust height for size
           display: 'flex',
-          justifyContent: 'center',
+          // justifyContent: 'center',
+          alignItems: 'center', // Center items vertically
         }}
       >
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
+          <NavItem style={{ marginRight: '20px' }}>
+            {/* <NavLink tag={Link} to="/" style={{ fontWeight: 'bold', color: '#fff', fontSize: '20px' }}>
+              MoneyMinder
+            </NavLink> */}
+          </NavItem>
             <NavItem>
               <NavLink tag={Link} to="/">Home</NavLink>
             </NavItem>
 
-            {/* <NavItem>
-              <NavLink tag={Link} to="/learn-more">Learn More</NavLink> 
-            </NavItem> */}
+          
 
             <NavItem>
               <NavLink tag={Link} to="/loan-list">Loans</NavLink>
