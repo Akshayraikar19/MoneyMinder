@@ -20,19 +20,26 @@ const port = 4444
 
 // CORS configuration
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://money-minder-frontend.vercel.app', /\.vercel\.app$/],
+    origin: function (origin, callback) {
+        const allowedOrigins = ['http://localhost:3000', 'https://money-minder-frontend.vercel.app'];
+        if (allowedOrigins.indexOf(origin) !== -1 || /\.vercel\.app$/.test(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
 }));
+
 
 app.use(express.json());
 // Define routes after CORS middleware
 
 
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 app.use(express.json())// Enable CORS for all origins and allow PUT method
@@ -44,9 +51,11 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 
 
+
 app.use(express.urlencoded({ extended: false }));
 
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression({
     level: 6,
     threshold: 100 * 1000,  
@@ -57,8 +66,6 @@ app.use(compression({
         return compression.filter(req, res);
     }
 }));
-
-
 
 const upload = require('./app/middlewares/multer')
 
