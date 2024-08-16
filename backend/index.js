@@ -1,29 +1,24 @@
-require('dotenv').config()
-const express = require('express')
-const configureDB = require('./config/db')
-configureDB()
-const {checkSchema} = require('express-validator')
-const compression = require('compression')
-const helmet = require('helmet')
+require('dotenv').config();
+const express = require('express');
+const configureDB = require('./config/db');
+configureDB();
+const { checkSchema } = require('express-validator');
+const compression = require('compression');
+const helmet = require('helmet');
 const path = require('path');
-// const morgan = require('morgan')
-const cors = require('cors')
-// const fs = require('fs');
+const cors = require('cors');
 
-const nodeCronCtlr = require('./app/utils/cronJob')
-nodeCronCtlr()
+const nodeCronCtlr = require('./app/utils/cronJob');
+nodeCronCtlr();
 
+const app = express();
+const port = process.env.PORT || 4444;
 
-const app = express()
-const port = 4444
-
-
-// CORS configuration
 // CORS configuration
 app.use(cors({
     origin: function (origin, callback) {
         const allowedOrigins = ['http://localhost:3000', 'https://money-minder-frontend.vercel.app'];
-        if (!origin || allowedOrigins.indexOf(origin) !== -1 || /\.vercel\.app$/.test(origin)) {
+        if (!origin || allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin)) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
@@ -34,37 +29,14 @@ app.use(cors({
     credentials: true,
 }));
 
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
-
-
 app.use(express.json());
-// Define routes after CORS middleware
-
-
-
-
-
-
-app.use(express.json())// Enable CORS for all origins and allow PUT method
-
-
-
-
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-
-
-
-
 app.use(express.urlencoded({ extended: false }));
 
-
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression({
     level: 6,
-    threshold: 100 * 1000,  
+    threshold: 100 * 1000,
     filter: (req, res) => {
         if (req.headers['x-no-compression']) {
             return false;
@@ -72,6 +44,7 @@ app.use(compression({
         return compression.filter(req, res);
     }
 }));
+
 
 const upload = require('./app/middlewares/multer')
 
