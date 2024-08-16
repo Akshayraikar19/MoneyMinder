@@ -45,6 +45,15 @@ app.use(compression({
     }
 }));
 
+const upload = require('./app/middlewares/multer');
+
+// Application-level middleware for logging requests
+app.use((req, res, next) => {
+    console.log(`${req.ip} - ${req.method} - ${req.url} - ${new Date()}`);
+    next();
+});
+
+
 
 const upload = require('./app/middlewares/multer')
 
