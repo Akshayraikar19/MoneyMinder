@@ -107,10 +107,7 @@ app.post('/users/forgot-password', checkSchema(forgotEmailValidationSchema) , us
 app.post('/users/reset-password',checkSchema(otpValidationSchema) ,usersCltr.resetPassword)
 
 //profile
-app.post('/api/customers/profile', 
-    authenticateUser, 
-    authorizeUser(['customer']), 
-    upload.fields([
+app.post('/api/customers/profile', authenticateUser, authorizeUser(['customer']),  upload.fields([
         { name: 'aadhaarPhoto', maxCount: 1 },
         { name: 'panPhoto', maxCount: 1 },
         { name: 'profilePic', maxCount: 1 }
@@ -118,20 +115,11 @@ app.post('/api/customers/profile',
     checkSchema(customerProfileValidationSchema), 
     customerCltr.createProfile
 );
-
-
 // Get customer profile route
-app.get('/api/customers/profile', 
-    authenticateUser, 
-    authorizeUser(['customer']), 
-    customerCltr.getProfile
-);
+app.get('/api/customers/profile',  authenticateUser,  authorizeUser(['customer']),  customerCltr.getProfile);
 
 // Update customer profile route
-app.put('/api/customers/profile', 
-    authenticateUser, 
-    authorizeUser(['customer']),  
-    upload.fields([
+app.put('/api/customers/profile',  authenticateUser,  authorizeUser(['customer']),  upload.fields([
         { name: 'aadhaarPhoto', maxCount: 1 },
         { name: 'panPhoto', maxCount: 1 },
         { name: 'profilePic', maxCount: 1 }
@@ -143,9 +131,7 @@ app.put('/api/customers/profile',
 
 
 // Create Officer Profile
-app.post('/api/officers/profile', 
-    authenticateUser, 
-    authorizeUser(['officer']),  
+app.post('/api/officers/profile',  authenticateUser,  authorizeUser(['officer']),  
     upload.fields([
         { name: 'aadhaarPhoto', maxCount: 1 },
         { name: 'panPhoto', maxCount: 1 },
@@ -156,17 +142,9 @@ app.post('/api/officers/profile',
 );
 
 // Get Officer Profile
-app.get('/api/officers/profile', 
-    authenticateUser, 
-    authorizeUser(['officer']), 
-    officerCltr.getProfile
-);
-
+app.get('/api/officers/profile',  authenticateUser,  authorizeUser(['officer']),  officerCltr.getProfile);
 // Update Officer Profile
-app.put('/api/officers/profile', 
-    authenticateUser, 
-    authorizeUser(['officer']), 
-    upload.fields([
+app.put('/api/officers/profile',  authenticateUser,  authorizeUser(['officer']),  upload.fields([
         { name: 'aadhaarPhoto', maxCount: 1 },
         { name: 'panPhoto', maxCount: 1 },
         { name: 'profilePic', maxCount: 1 }

@@ -257,7 +257,8 @@ paymentCltr.list = async (req, res) => {
 
         // Ensure page and limit are integers
         const pageNumber = parseInt(page, 10);
-        const limitNumber = parseInt(limit, 10);
+        const limitNumber = parseInt(limit, 10); // for 1 page 10 records
+        
 
         // Validate page and limit
         if (isNaN(pageNumber) || pageNumber < 1) {
@@ -272,7 +273,7 @@ paymentCltr.list = async (req, res) => {
         if (sortBy) {
             sortOptions[sortBy] = order === 'desc' ? -1 : 1;
         } else {
-            sortOptions.createdAt = -1; // Default sort by date descending
+            sortOptions.createdAt = -1; // Default sort by date descending so that we can get recent payment details
         }
 
         // Pagination setup
@@ -283,7 +284,7 @@ paymentCltr.list = async (req, res) => {
 
         // Add search filter if provided
         if (search) {
-            const searchRegex = new RegExp(search, 'i');
+            const searchRegex = new RegExp(search, 'i'); // regex is used for partial search and for caseinsesitive search we are using options
             filter.paymentStatus = { $regex: searchRegex };
         }
 

@@ -55,7 +55,7 @@ export default function SingleApplicationAdmin() {
             if (updateResponse.status === 200) {
                 toast.success('Application updated successfully');
                 setStatusUpdated(true); //status updated to true after successful update
-                navigate('/admin/applications');
+                navigate('/applications');
             } else {
                 toast.error('Failed to update application');
             }

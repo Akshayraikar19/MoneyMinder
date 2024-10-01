@@ -9,6 +9,7 @@
 // }
 
 // module.exports = configureDB
+
 const mongoose = require('mongoose');
 
 // Function to configure the database connection

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
 
+
 const SingleApplication = () => {
     const { id, appId } = useParams();
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const SingleApplication = () => {
     const [status, setStatus] = useState("");
     const [rejectedReason, setRejectedReason] = useState("");
     const [hasUpdated, setHasUpdated] = useState(false);
-
+  
     useEffect(() => {
         const fetchApplication = async () => {
             try {
@@ -52,6 +53,7 @@ const SingleApplication = () => {
             }
 
             toast.success('Application status updated successfully.');
+            navigate('/my-loans')
             setHasUpdated(true);
         } catch (error) {
             console.error('Error updating application status:', error);
