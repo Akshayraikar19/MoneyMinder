@@ -70,3 +70,4 @@ const userRegisterValidationSchema = {
 };
 
 module.exports = userRegisterValidationSchema
+

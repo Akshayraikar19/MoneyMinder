@@ -15,7 +15,7 @@ nodeCronCtlr()
 
 
 const app = express()
-const port = 4444
+const port = process.env.PORT
 
 
 // CORS configuration
