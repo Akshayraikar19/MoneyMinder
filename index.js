@@ -19,12 +19,7 @@ const port = process.env.PORT
 
 
 // CORS configuration
-app.use(cors({
-    origin: ['http://localhost:3000', 'https://money-minder-frontend.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-}));
+app.use(cors());
 
 app.use(express.json());
 // Define routes after CORS middleware
