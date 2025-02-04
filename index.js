@@ -19,7 +19,14 @@ const port = process.env.PORT
 
 
 // CORS configuration
-app.use(cors());
+// app.use(cors());
+
+const corsOptions = {
+  origin: 'http://localhost:3000', // Your React app's URL
+  credentials: true, // Allow credentials
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 // Define routes after CORS middleware
