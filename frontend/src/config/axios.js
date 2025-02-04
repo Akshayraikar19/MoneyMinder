@@ -4,12 +4,20 @@
 //     baseURL: 'http://localhost:4444'
 // })
 
+// import axios from "axios";
+
+// console.log('API Base URL:', process.env.REACT_APP_API_BASE_URL);
+
+// export default axios.create({
+//     baseURL: process.env.REACT_APP_API_BASE_URL
+// });
+
 import axios from "axios";
 
 console.log('API Base URL:', process.env.REACT_APP_API_BASE_URL);
 
 export default axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL
+    baseURL: https://moneyminder-6opv.onrender.com
 });
 
 
