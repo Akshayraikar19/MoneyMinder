@@ -28,25 +28,27 @@ paymentCltr.payOnline= async (req, res) => {
             },
         });
 
-        // Create a checkout session with Stripe
-        const session = await stripe.checkout.sessions.create({ //invoice creation with only name field
-            payment_method_types: ['card'],
-            line_items: [{
-                price_data: {
-                    currency: 'inr',
-                    product_data: {
-                        name: "EMI Payment"
-                    },
-                    unit_amount: Math.round(emiAmount* 100 ) // in my case i need emi Amount
-                },
-                quantity: 1
-            }],
-            mode: "payment",
-            success_url: 'http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url: 'http://localhost:3000/cancel?session_id={CHECKOUT_SESSION_ID}', 
-            customer: customer.id
-        });
+       const BASE_URL = process.env.NODE_ENV === 'production' 
+    ? 'https://moneyminder-exze785pu-akshays-projects-100eb65b.vercel.app' 
+    : 'http://localhost:3000';
 
+const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: [{
+        price_data: {
+            currency: 'inr',
+            product_data: {
+                name: "EMI Payment"
+            },
+            unit_amount: Math.round(emiAmount * 100) // Convert to paise
+        },
+        quantity: 1
+    }],
+    mode: "payment",
+    success_url: `${BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${BASE_URL}/cancel?session_id={CHECKOUT_SESSION_ID}`, 
+    customer: customer.id
+});
         // Create and save payment details to database
         const payment = new Payment({
             applicationId: body.applicationId,    // application in my case is invoiceId
