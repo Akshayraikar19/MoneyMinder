@@ -19,14 +19,16 @@ const port = process.env.PORT
 
 
 // CORS configuration
-// app.use(cors());
+const allowedOrigins = [
+    'http://localhost:3000', // Local development
+    'https://moneyminder-exze785pu-akshays-projects-100eb65b.vercel.app' // Your deployed frontend
+];
 
-const corsOptions = {
-  origin: 'http://localhost:3000', // Your React app's URL
-  credentials: true, // Allow credentials
-};
-
-app.use(cors(corsOptions));
+app.use(cors({
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true // If you need to support cookies or authentication
+}));
 
 app.use(express.json());
 // Define routes after CORS middleware
