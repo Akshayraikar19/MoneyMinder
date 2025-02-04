@@ -16,10 +16,8 @@ const mongoose = require('mongoose');
 const configureDB = async () => {
     try {
         // Connect to MongoDB Atlas using the connection string from environment variables
-        const db = await mongoose.connect(process.env.DB_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
+        const db = await mongoose.connect(process.env.DB_URL);
+
         console.log('Connected to DB');
     } catch (err) {
         console.log('Error connecting to DB:', err);
