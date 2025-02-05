@@ -21,7 +21,7 @@ const port = process.env.PORT
 // CORS configuration
 const allowedOrigins = [
     'http://localhost:3000', // Local development
-    'https://moneyminder-exze785pu-akshays-projects-100eb65b.vercel.app' // Your deployed frontend
+    ' https://moneyminder-lh2uxvsnq-akshays-projects-100eb65b.vercel.app' // Your deployed frontend
 ];
 
 app.use(cors({
