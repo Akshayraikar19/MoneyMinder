@@ -29,7 +29,7 @@ paymentCltr.payOnline= async (req, res) => {
         });
 
        const BASE_URL = process.env.NODE_ENV === 'production' 
-    ? ' https://moneyminder-lh2uxvsnq-akshays-projects-100eb65b.vercel.app' 
+    ? 'https://moneyminder-lh2uxvsnq-akshays-projects-100eb65b.vercel.app' 
     : 'http://localhost:3000';
 
 const session = await stripe.checkout.sessions.create({
